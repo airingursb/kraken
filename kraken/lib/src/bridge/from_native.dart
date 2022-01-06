@@ -308,9 +308,9 @@ final Pointer<NativeFunction<NativePlatformBrightness>> _nativePlatformBrightnes
 
 typedef NativeGetScreen = Pointer<Void> Function();
 
-Pointer<Void> _getScreen() {
-  Size size = window.physicalSize;
-  return createScreen(size.width / window.devicePixelRatio, size.height / window.devicePixelRatio);
+Pointer<Void> _getScreen(int contextId) {
+  KrakenController controller = KrakenController.getControllerOfJSContextId(contextId)!;
+  return createScreen(controller.view.viewportWidth, controller.view.viewportHeight);
 }
 
 final Pointer<NativeFunction<NativeGetScreen>> _nativeGetScreen = Pointer.fromFunction(_getScreen);
